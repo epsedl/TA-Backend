@@ -1490,7 +1490,7 @@ router.post('/admin/send-reset-password-link', auth, async (req, res) => {
     );
 
     // Send email with reset link
-    const resetLink = `${process.env.FRONTEND_URL || 'http://172.26.0.217:3004'}/activate-account?token=${token}`;
+    const resetLink = `${process.env.FRONTEND_URL}/activate-account?token=${token}`;
     await EmailService.sendEmail(
       email,
       'Reset Your Expense Tracker Password',
