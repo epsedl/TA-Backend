@@ -145,7 +145,7 @@ router.post('/bulk-resend-activation', auth, async (req, res) => {
         'INSERT INTO user_activation_tokens (emp_id, token, expires_at) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE token=?, expires_at=?',
         [emp.emp_id, token, expiresAt, token, expiresAt]
       );
-      const activationLink = `${process.env.FRONTEND_URL || 'http://172.26.0.217:3004'}/activate-account?token=${token}`;
+      const activationLink = `${process.env.FRONTEND_URL || 'https://tadasedl.vercel.app'}/activate-account?token=${token}`;
       try {
         await EmailService.sendEmail(
           emp.email,
@@ -693,7 +693,7 @@ router.post('/', auth, async (req, res) => {
     );
 
     // Send activation email
-    const activationLink = `${process.env.FRONTEND_URL || 'http://172.26.0.217:3004'}/activate-account?token=${token}`;
+    const activationLink = `${process.env.FRONTEND_URL || 'https://tadasedl.vercel.app'}/activate-account?token=${token}`;
     try {
       await EmailService.sendEmail(
         email,
@@ -1326,7 +1326,7 @@ router.post('/upload-csv', upload.single('file'), async (req, res) => {
             [empId, token, expiresAt]
           );
 
-          const activationLink = `${process.env.FRONTEND_URL || 'http://172.26.0.217:3004'}/activate-account?token=${token}`;
+          const activationLink = `${process.env.FRONTEND_URL || 'https://tadasedl.vercel.app'}/activate-account?token=${token}`;
           await EmailService.sendEmail(
             record.email,
             'Activate your Expense Tracker Account',
